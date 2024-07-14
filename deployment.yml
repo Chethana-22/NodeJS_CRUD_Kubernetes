@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: crudapp-deployment
+  labels:
+    app: crudapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: crudapp
+  template:
+    metadata:
+      labels: 
+        app: crudapp
+    spec: 
+      containers:
+      - name: crudappserver
+        image: chethanasv/crudapp-app:tag
+        ports:
+        - containerPort: 3000
+        env:
+        - name: MONGO_URL
+          value: "mongodb://mongodb-service:27017/Crud_App"
